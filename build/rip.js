@@ -1285,6 +1285,9 @@ function addPrintingsToCard(card, force, cb)
 		function getAllPages(doc)
 		{
 			var pageLinks = doc("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_PrintingsList_pagingControlsContainer a").map(function(i, item) { return doc(item); });
+			
+			addLegalities(doc, card)
+
 			var numPages = pageLinks.length>0 ? pageLinks.length : 1;
 			for(var i=0;i<numPages;i++)
 			{
@@ -1332,6 +1335,20 @@ function buildMultiversePrintingsURL(multiverseid, page)
 	};
 
 	return url.format(urlConfig);
+}
+
+function addLegalities(doc, card) {
+	card.legalities = {};
+
+	doc("table.cardList:nth-of-type(2) tr.cardItem").each(function(i, tr) {
+		def tds = $(tr).find('td')
+		def format = tds.eq(0).text()
+		def legality = tds.eq(1).text()
+
+		card.legalities[format] = legality
+
+		console.log("format: " + format + "; legality: " + legality)
+	});
 }
 
 
