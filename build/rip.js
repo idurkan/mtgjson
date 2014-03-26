@@ -1341,9 +1341,9 @@ function addLegalities(doc, card) {
 	card.legalities = {};
 
 	doc("table.cardList:nth-of-type(2) tr.cardItem").each(function(i, tr) {
-		def tds = $(tr).find('td')
-		def format = tds.eq(0).text()
-		def legality = tds.eq(1).text()
+		var tds = $(tr).find('td')
+		var format = tds.eq(0).text()
+		var legality = tds.eq(1).text()
 
 		card.legalities[format] = legality
 
